@@ -81,4 +81,11 @@ class QueryIntegrationTests {
         assertEquals(tagCloudMapExpected, tagCloudMap)
     }
 
+    @Test
+    void testBasicHQL(){
+        def glen = new User(userId: 'glen', password: 'password').save()
+        def foundGlen = User.find("FROM User u WHERE u.userId = :uid", [uid: 'glen'])
+        assertEquals(glen, foundGlen)
+    }
+
 }
