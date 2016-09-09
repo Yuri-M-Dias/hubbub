@@ -1,6 +1,8 @@
 package hubbub
 
+import com.grailsinaction.Post
 import com.grailsinaction.Profile
+import com.grailsinaction.Tag
 import com.grailsinaction.User
 
 import static org.junit.Assert.*
@@ -49,6 +51,34 @@ class QueryIntegrationTests {
         userToFind = new User(password: 'password')
         def u3 = User.findAll(userToFind)
         assertEquals(['glen', 'peter'], u3*.userId)
+    }
+
+    @Test
+    void testQueryProjections(){
+        def glen = new User(userId: 'glen', password: 'password').save()
+        def groovyTag = new Tag(name: 'groovy')
+        glen.addToTags(groovyTag)
+        def grailsTag = new Tag(name: 'grails')
+        glen.addToTags(grailsTag)
+        new Post(content: 'Glen posted this 1.', user: glen, tags: [grailsTag]).save()
+        new Post(content: 'Glen posted this 2.', user: glen, tags: [groovyTag]).save()
+        new Post(content: 'Glen posted this 3.', user: glen, tags: [groovyTag]).save()
+        assertEquals(['grails', 'groovy'], glen.tags*.name.sort())
+        def tagList = Post.withCriteria {
+            createAlias("user", "u")
+            createAlias("tags", "t")
+            eq("u.userId", "glen")
+            projections {
+                groupProperty("t.name")
+                count("t.id")
+            }
+        }
+        def tagCloudMap = tagList.inject([ : ]) { map, tag ->
+            map[ tag[0] ] = tag[1]
+            map
+        }
+        def tagCloudMapExpected = [grails: 1L, groovy: 2L]
+        assertEquals(tagCloudMapExpected, tagCloudMap)
     }
 
 }
