@@ -29,6 +29,10 @@
         </p>
     </div>
 
+    <h:lameBrowser userAgent="MSIE">
+        <p>Dude, Firefox really is better. No, really. </p>
+    </h:lameBrowser>
+
     <div class="allPosts">
         <g:each in="${user.posts}" var="post">
             <div class="postEntry">
@@ -38,8 +42,11 @@
                 <div class="postDate">
                     ${post.dateCreated}
                 </div>
+                <h:dateFromNow date="${post.dateCreated}" />
             </div>
         </g:each>
+        <!-- Useless? -->
+        <g:paginate total="${user.posts.count {}}" max="25" />
     </div>
 
 </body>

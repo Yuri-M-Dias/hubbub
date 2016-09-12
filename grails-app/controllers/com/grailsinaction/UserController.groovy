@@ -3,6 +3,8 @@ package com.grailsinaction
 class UserController {
     def scaffold = true
 
+    def profile = {}
+
     def search = {}
 
     def results = {
@@ -72,7 +74,7 @@ class UserRegistrationCommand {
         bio(nullable: true, maxSize: 1000)
         homepage(url: true, nullable: true)
         email(email: true, nullable: true)
-        photo(nullable: true)
+        photo(nullable: true, maxSize: 100000)
         country(nullable: true)
         timezone(nullable: true)
         jabberAddress(email: true, nullable: true)
