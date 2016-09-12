@@ -1,7 +1,6 @@
 package com.grailsinaction
 
-
-
+import grails.test.MockUtils
 import grails.test.mixin.*
 import org.junit.*
 
@@ -11,7 +10,14 @@ import org.junit.*
 @TestFor(PostController)
 class PostControllerTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testShow() {
+        MockUtils.mockDomain(User, [
+                new User(userId: 'glen'),
+                new User(userId: 'peter')
+        ])
+        this.controller.params.id = "peter"
+        def model = this.controller.show()
+        assertEquals "peter", model["viewUser"]?.userId
     }
+
 }
