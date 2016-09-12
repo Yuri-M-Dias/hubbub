@@ -2,8 +2,8 @@ grails.servlet.version = "2.5" // Change depending on target container complianc
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-grails.project.target.level = 1.7
-grails.project.source.level = 1.7
+grails.project.target.level = 1.6
+grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 // uncomment (and adjust settings) to fork the JVM to isolate classpaths
@@ -35,12 +35,12 @@ grails.project.dependency.resolution = {
         // Default plugin repository changed
         mavenRepo "https://repo.grails.org/grails/plugins"
         mavenRepo "https://repo.grails.org/grails/core"
-        mavenRepo "https://oss.sonatype.org/content/repositories/releases/"
-        mavenRepo "http://repo.spring.io/milestone"
-        mavenRepo "https://repository.jboss.org/maven2/"
-        mavenRepo "http://download.java.net/maven/2/"
-        mavenRepo "http://repository.springsource.com/maven/bundles/release"
-        mavenRepo "http://repository.springsource.com/maven/bundles/external"
+        //mavenRepo "https://oss.sonatype.org/content/repositories/releases/"
+        //mavenRepo "http://repo.spring.io/milestone"
+        //mavenRepo "https://repository.jboss.org/maven2/"
+        //mavenRepo "http://download.java.net/maven/2/"
+        //mavenRepo "http://repository.springsource.com/maven/bundles/release"
+        //mavenRepo "http://repository.springsource.com/maven/bundles/external"
     }
 
     dependencies {
