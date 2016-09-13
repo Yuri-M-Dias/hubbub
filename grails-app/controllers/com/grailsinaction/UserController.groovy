@@ -1,5 +1,7 @@
 package com.grailsinaction
 
+import java.text.SimpleDateFormat
+
 class UserController {
     def scaffold = true
 
@@ -41,6 +43,26 @@ class UserController {
                 //Not unique userId?
                 return [ user: urc]
             }
+        }
+    }
+
+    def stats = {
+        User user = User.findByUserId(params.userId)
+        if (user) {
+            def sdf = new SimpleDateFormat('E')
+            def postsOnDay = [:]
+            user.posts.each { post ->
+                def dayOfWeek = sdf.format(post.dateCreated)
+                if (postsOnDay[dayOfWeek]) {
+                    postsOnDay[dayOfWeek]++
+                } else {
+                    postsOnDay[dayOfWeek] = 1
+                }
+            }
+            return [ userId: params.userId, postsOnDay: postsOnDay ]
+        } else {
+            flash.message = "No stats available for that user"
+            redirect(uri: "/")
         }
     }
 

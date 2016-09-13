@@ -25,6 +25,11 @@ class UrlMappings {
 			}
 		}
 
+		"/users/$userId/stats"{
+            controller = "user"
+			action = "stats"
+		}
+
 		"/"(view:"/index")
 		"500"(view:'/error')
 	}

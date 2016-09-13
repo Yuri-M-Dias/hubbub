@@ -11,7 +11,7 @@ class LameSecurityFilters {
                     session.user = User.findByUserId(params.userId)
                 }
                 if(!session.user){
-                    redirect(controller: 'login', action: 'form')
+                    //redirect(controller: 'login', action: 'form')
                     return false
                 }
             }

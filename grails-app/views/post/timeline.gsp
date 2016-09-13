@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>
-        Timeline for ${user.profile.fullName}
+        Timeline for ${user?.profile?.fullName}
     </title>
     <meta name="layout" content="main">
 </head>
 
 <body>
-    <h1>Timeline for ${user.profile.fullName}</h1>
+    <h1 id="userFullname">Timeline for ${user?.profile?.fullName}</h1>
 
     <g:if test="${flash.message}">
         <div class="flash">
@@ -24,14 +24,10 @@
             <g:form action="addPost" id="${params.id}">
                 <g:textArea id="postContent" name="content" rows="3" cols="50" />
                 <br/>
-                <g:submitButton name="post" value="Post"/>
+                <g:submitButton id="submitNewPost" name="post" value="Post"/>
             </g:form>
         </p>
     </div>
-
-    <h:lameBrowser userAgent="MSIE">
-        <p>Dude, Firefox really is better. No, really. </p>
-    </h:lameBrowser>
 
     <div class="allPosts">
         <g:each in="${user.posts}" var="post">
@@ -45,8 +41,6 @@
                 <h:dateFromNow date="${post.dateCreated}" />
             </div>
         </g:each>
-        <!-- Useless? -->
-        <g:paginate total="${user.posts.count {}}" max="25" />
     </div>
 
 </body>
