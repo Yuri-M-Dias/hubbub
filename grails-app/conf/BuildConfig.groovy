@@ -35,6 +35,7 @@ grails.project.dependency.resolution = {
         // Default plugin repository changed
         mavenRepo "https://repo.grails.org/grails/plugins"
         mavenRepo "https://repo.grails.org/grails/core"
+        mavenRepo "http://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support"
         //mavenRepo "https://oss.sonatype.org/content/repositories/releases/"
         //mavenRepo "http://repo.spring.io/milestone"
         //mavenRepo "https://repository.jboss.org/maven2/"
@@ -43,8 +44,16 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.springsource.com/maven/bundles/external"
     }
 
+    def gebVersion = "0.9.2"
+    def seleniumVersion = "2.35.0"
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
+        test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+        test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+        test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+        test "org.gebish:geb-spock:$gebVersion"
+        test "org.seleniumhq.selenium:selenium-support:2.40.0"
 
         // runtime 'mysql:mysql-connector-java:5.1.22'
     }
@@ -53,24 +62,18 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
-
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0"
-        //runtime ":cached-resources:1.0"
-        //runtime ":yui-minify-resources:0.1.5"
+        runtime ":database-migration:1.3.2"
 
         build ":tomcat:$grailsVersion"
-
-        runtime ":database-migration:1.3.2"
 
         compile ':cache:1.0.1'
         compile ":google-chart:0.4.8"
 
-        test ":webdriver:0.4.2"
         test ':code-coverage:1.2.5'
-        //test ':spock:0.7'
-
-        //test ':functional-test:2.0.0'
+        test ":geb:$gebVersion"
+        test (":spock:0.7") {
+            exclude "spock-grails-support"
+        }
     }
 
 }
