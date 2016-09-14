@@ -22,7 +22,9 @@ class PostController {
             flash.message = "Added new post: ${newPost.content}"
         } catch (PostException pe) {
             flash.message = pe.message
+            log.info(pe)
         }
+        log.info(params)
         redirect(action: 'timeline', id: params.id)
     }
 

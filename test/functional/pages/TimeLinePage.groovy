@@ -1,18 +1,18 @@
 package pages
 
-import org.codehaus.groovy.grails.plugins.webdriver.ButtonElement
-import org.codehaus.groovy.grails.plugins.webdriver.WebDriverPage
+import geb.Page
 
-class TimeLinePage extends WebDriverPage {
-    static expectedTitle = ~".*Hubbub.*"
-    //static expectedURL = ~/\/post\/timeline\/.*/
+class TimeLinePage extends Page {
+    static url = "post/timeline/glen"
 
-    String postContent
-    String userFullname
+    static at = {
+        title.contains("Hubbub")
+    }
 
-    ButtonElement<TimeLinePage> submitNewPost
-
-    static elements = {
+    static content = {
+        postContent { $("#postContent") }
+        userFullname { $("#userFullname") }
+        submitNewPost { $("#submitNewPost")}
     }
 
 }
